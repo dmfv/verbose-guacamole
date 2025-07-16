@@ -1,0 +1,132 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpl7457f3wlka"]
+
+[ext_resource type="Script" uid="uid://bi7uxodnqbly1" path="res://Main.gd" id="1_glv2v"]
+[ext_resource type="Theme" uid="uid://d15sbjydy8uh7" path="res://default_theme.tres" id="2_uu6xs"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_glv2v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_uu6xs")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="RootVBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HeaderHBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/RootVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/MarginContainer/RootVBoxContainer/HeaderHBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Dictionary" type="Button" parent="CanvasLayer/MarginContainer/RootVBoxContainer/HeaderHBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_mask = 3
+text = "Swap Answer Mode"
+autowrap_mode = 2
+
+[node name="CentralVBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/RootVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WordLable" type="Label" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_uu6xs")
+text = "Word in english"
+horizontal_alignment = 1
+
+[node name="WordInfinitiveForm" type="Label" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_uu6xs")
+text = "Word infinitive"
+horizontal_alignment = 1
+
+[node name="AskedTense" type="Label" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_uu6xs")
+text = "Tense"
+horizontal_alignment = 1
+
+[node name="UserInput" type="LineEdit" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "your answer"
+alignment = 1
+
+[node name="ShowAnswer" type="Button" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_mask = 3
+text = "show answer"
+
+[node name="CorrectAnswerSign" type="Label" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 1, 0.0823529, 1)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "You are correct!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModulationTimer" type="Timer" parent="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer/CorrectAnswerSign"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="HSeparator" type="HSplitContainer" parent="CanvasLayer/MarginContainer/RootVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FooterHBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/RootVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="NextWord" type="Button" parent="CanvasLayer/MarginContainer/RootVBoxContainer/FooterHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_mask = 3
+text = "next"
+
+[node name="PrevWord" type="Button" parent="CanvasLayer/MarginContainer/RootVBoxContainer/FooterHBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_mask = 3
+text = "prev"
+
+[node name="Dictionary" type="Button" parent="CanvasLayer/MarginContainer/RootVBoxContainer/FooterHBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+button_mask = 3
+text = "dict
+"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer/ShowAnswer" to="." method="_on_show_answer_pressed"]
+[connection signal="timeout" from="CanvasLayer/MarginContainer/RootVBoxContainer/CentralVBoxContainer/CorrectAnswerSign/ModulationTimer" to="." method="_on_modulation_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/RootVBoxContainer/FooterHBoxContainer/NextWord" to="." method="_on_next_word_pressed"]
